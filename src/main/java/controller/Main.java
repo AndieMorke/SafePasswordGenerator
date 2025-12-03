@@ -1,19 +1,28 @@
-package PasswordController;
+package controller;
 import model.Password;
+import view.PasswordView;
 
-public class PasswordController {
-
+public class Main {
     public static void main(String[] args) {
-
         Password pwd = new Password();
-        pwd.setUserPassword(12);
-        pwd.fillUserPassword();
+        PasswordView view = new PasswordView();
+        boolean exit = false;
 
-        while(!pwd.safePassword()){
-            pwd.fillUserPassword();
-        }
+        do {
+            if (view.menu() == 1) {
+                pwd.setUserPassword(view.askLength());
+                pwd.createUserPassword();
 
-        pwd.showPassword();
+                while (!pwd.safePassword()) {
+                    pwd.createUserPassword();
+                }
+
+                view.showPassword(pwd);
+
+            } else exit = true;
+
+        }while (!exit);
+
 
 
     }
