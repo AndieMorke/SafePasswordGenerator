@@ -29,7 +29,6 @@ public class PasswordView {
     }
 
 
-
     // Mostrar menú al usuario
     public int menu(){
 
@@ -45,7 +44,6 @@ public class PasswordView {
                 System.out.println("¡Hasta luego!");
             }
             return option;
-
 
     }
 

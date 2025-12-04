@@ -23,7 +23,6 @@ public class Password {
     public void setCharacters() {
         this.characters = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     }
-
     public char[] getCharacters() {
         return this.characters;
     }
@@ -33,7 +32,6 @@ public class Password {
     public void setSpecialCharacters() {
         this.specialCharacters = new char[]{'!', '@', '#', '$', '%', '*', '(', ')', '_', '+', '-', '=', '[', ']', '{', '}', '.', ',', '?'};
     }
-
     public char[] getSpecialCharacters() {
         return this.specialCharacters;
     }
@@ -47,7 +45,6 @@ public class Password {
             this.upperCaseCharacters[i] = Character.toUpperCase(this.getCharacters()[i]);
         }
     }
-
     public char[] getUpperCaseCharacters() {
         return this.upperCaseCharacters;
     }
@@ -57,7 +54,6 @@ public class Password {
     public void setNumbers() {
         this.numbers = new char[]{'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
     }
-
     public char[] getNumbers() {
         return this.numbers;
     }
@@ -67,12 +63,12 @@ public class Password {
     public void setUserPassword(int length) {
         this.userPassword = new char[length];
     }
-
     public char[] getUserPassword() {
         return this.userPassword;
     }
 
 
+    // Crear una contraseña para el usuario
     public void createUserPassword() {
 
         boolean hasNumber, hasSpecial, hasUpper;
