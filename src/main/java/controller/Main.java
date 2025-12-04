@@ -12,11 +12,6 @@ public class Main {
             if (view.menu() == 1) {
                 pwd.setUserPassword(view.askLength());
                 pwd.createUserPassword();
-
-                while (!pwd.safePassword()) {
-                    pwd.createUserPassword();
-                }
-
                 view.showPassword(pwd);
 
             } else exit = true;

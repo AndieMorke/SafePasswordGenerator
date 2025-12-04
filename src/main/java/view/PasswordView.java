@@ -7,10 +7,9 @@ import java.util.Scanner;
 public class PasswordView {
     Scanner input = new Scanner(System.in);
     public void showPassword(Password pwd) {
-        System.out.println("-------------------");
+        System.out.print("\n---------------------------------------\nContraseña: ");
         System.out.print(new String(pwd.getUserPassword()));
-        System.out.println();
-        System.out.println("-------------------");
+        System.out.println("\n--------------------------------------\n");
     }
 
     public int askLength(){
