@@ -6,16 +6,16 @@ import java.awt.*;
 
 public class PasswordPanel extends JPanel {
 
-    private JLabel length;
+    private JLabel length,copyright;
     private JTextField number;
     private JButton genPassword;
     private JTextField showPassword;
-    private JPanel lengthPanel,menu,generate;
+    private JPanel lengthPanel,menu,generate,copyrightPanel;
 
     public PasswordPanel (){
 
        setLayout(new BorderLayout(5,5));
-       setBorder(new EmptyBorder(10, 20, 20, 20)); // top, left, bottom, right
+       setBorder(new EmptyBorder(10, 20, 10, 20)); // top, left, bottom, right
 
        menu = new JPanel(new GridLayout(2,1));
         lengthPanel = new JPanel(new FlowLayout());
@@ -39,6 +39,13 @@ public class PasswordPanel extends JPanel {
             showPassword.setFont(new Font("Arial", Font.BOLD, 28));
             showPassword.setHorizontalAlignment(JTextField.CENTER);
        add(showPassword,BorderLayout.CENTER);
+
+       copyrightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+       copyright = new JLabel("© Andie Mørke");
+       copyright.setFont(new Font("Serif", Font.PLAIN,14));
+       copyrightPanel.add(copyright);
+       add(copyrightPanel,BorderLayout.SOUTH);
+
 
     }
 

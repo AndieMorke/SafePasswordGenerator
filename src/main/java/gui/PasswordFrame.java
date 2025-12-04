@@ -23,9 +23,7 @@ public class PasswordFrame extends JFrame {
         this.setVisible(true);
 
         panel.getGenPassword().addActionListener(new ManagerPasswordFrame());
-
     }
-
 
 
     private class ManagerPasswordFrame implements ActionListener {
@@ -33,13 +31,25 @@ public class PasswordFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == panel.getGenPassword()) {
                 Password pwd = new Password();
+                int length;
                 try {
-                    int length = Integer.parseInt(panel.getNumber().getText());
+                    length = Integer.parseInt(panel.getNumber().getText());
+                    while (length < 6) {
+                        JOptionPane.showMessageDialog(null, "Introduce un número mayor o igual que 6");
+                        panel.getNumber().setText("");
+                        panel.getNumber().requestFocusInWindow();
+                        return;
+                    }
                     pwd.setUserPassword(length);
                     pwd.createUserPassword();
                     panel.getShowPassword().setText(new String(pwd.getUserPassword()));
+                    panel.getNumber().setText("");
+                    panel.getNumber().requestFocusInWindow();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Introduce un número válido");
+                    panel.getNumber().setText("");
+                    panel.getNumber().requestFocusInWindow();
+
                 }
             }
         }
