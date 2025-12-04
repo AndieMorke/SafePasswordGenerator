@@ -21,5 +21,13 @@ test {
 }
 
 application {
-    mainClassName = 'Controller.Main'  // Pon aquí el package + nombre de tu Main.java
+    mainClass = 'controller.Main'  // Gradle 7+ usa mainClass en vez de mainClassName
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'controller.Main'
+        )
+    }
 }
