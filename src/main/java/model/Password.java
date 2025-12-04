@@ -34,6 +34,7 @@ public class Password {
 
     // SETTER Y GETTER para los caracteres en mayúsculas
     public void setUpperCaseCharacters() {
+
         this.upperCaseCharacters = new char[getCharacters().length];
         for (int i = 0; i < characters.length; i++) {
             this.upperCaseCharacters[i] = Character.toUpperCase(this.getCharacters()[i]);
@@ -43,13 +44,14 @@ public class Password {
         return this.upperCaseCharacters;
     }
 
+
+    // SETTER Y GETTER para los números
     public void setNumbers() {
         this.numbers = new char[]{'1','2','3','4','5','6','7','8','9','0'};
     }
     public char[] getNumbers() {
         return this.numbers;
     }
-
 
 
     // SETTER Y GETTER para la contraseña a generar
@@ -111,7 +113,7 @@ public class Password {
     }
 
 
-    // Comprobar si la contraseña es segura (Debe contener al menos una mayúscula, un carácter especial y un número)
+    // Comprobar seguridad (Debe contener al menos una mayúscula, un carácter especial y un número)
     public boolean safePassword() {
         boolean upper, special, number;
         upper = false;
