@@ -13,6 +13,11 @@ public class Password {
     private char[] numbers;
     private char[] userPassword;
 
+    public Password() {
+        this.setSpecialCharacters();
+        this.setUpperCaseCharacters();
+        this.setNumbers();
+    }
 
     // SETTER Y GETTER para los caracteres
     public void setCharacters() {
@@ -65,41 +70,47 @@ public class Password {
 
     // Crear contraseña
     public void createUserPassword() {
-        // Establecer los caracteres
-        this.setSpecialCharacters();
-        this.setUpperCaseCharacters();
-        this.setNumbers();
 
 
         // Colocar los caracteres de forma aleatoria confirmando que no se repitan de forma consecutiva
         for (int i = 0; i < this.getUserPassword().length; i++) {
             switch (random.nextInt(4)) {
-                case 0: // caracteres
-                    this.nonConsecutives(i, this.getCharacters());
+                case 0: // letra minúscula
+                    this.userPassword[i] = this.getCharacters()[random.nextInt(this.getCharacters().length)];
+                    if (i > 0) {
+                        while (this.userPassword[i] == this.userPassword[i - 1]) {
+                            this.userPassword[i] = this.getCharacters()[random.nextInt(this.getCharacters().length)];
+                        }
+                    }
                     break;
-                case 1: // caracteres especiales
-                    this.nonConsecutives(i, this.getSpecialCharacters());
+                case 1: // especial
+                    this.userPassword[i] = this.getSpecialCharacters()[random.nextInt(this.getSpecialCharacters().length)];
+                    if (i > 0) {
+                        while (this.userPassword[i] == this.userPassword[i - 1]) {
+                            this.userPassword[i] = this.getSpecialCharacters()[random.nextInt(this.getSpecialCharacters().length)];
+                        }
+                    }
                     break;
-                case 2: // mayúsculas
-                    this.nonConsecutives(i, this.getUpperCaseCharacters());
+                case 2: // mayúscula
+                    this.userPassword[i] = this.getUpperCaseCharacters()[random.nextInt(this.getUpperCaseCharacters().length)];
+                    if (i > 0) {
+                        while (this.userPassword[i] == this.userPassword[i - 1]) {
+                            this.userPassword[i] = this.getUpperCaseCharacters()[random.nextInt(this.getUpperCaseCharacters().length)];
+                        }
+                    }
                     break;
-                case 3: // números
-                    this.nonConsecutives(i, this.getNumbers());
+                case 3: // número
+                    this.userPassword[i] = this.getNumbers()[random.nextInt(this.getNumbers().length)];
+                    if (i > 0) {
+                        while (this.userPassword[i] == this.userPassword[i - 1]) {
+                            this.userPassword[i] = this.getNumbers()[random.nextInt(this.getNumbers().length)];
+                        }
+                    }
                     break;
             }
         }
 
-    }
 
-    // Revisar caracteres no consecutivos
-    public void nonConsecutives(int i, char[] array) {
-        char newChar = array[random.nextInt(array.length)];
-        if (i > 0) {
-            while (newChar == this.userPassword[i - 1]) {
-                newChar = array[random.nextInt(array.length)];
-            }
-        }
-        this.userPassword[i] = newChar;
     }
 
 
@@ -130,10 +141,11 @@ public class Password {
                     break;
                 }
             }
+            if(special && number && upper){
+                break;
+            }
         }
         return special && number && upper;
-
-
     }
 
 }
