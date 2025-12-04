@@ -7,51 +7,56 @@ public class Password {
     Random random = new Random();
 
     // Atributos
-    private String[] characters;
-    private String[] specialCharacters;
-    private String[] upperCaseCharacters;
-    private String[] userPassword;
+    private char[] characters;
+    private char[] specialCharacters;
+    private char[] upperCaseCharacters;
+    private char[] numbers;
+    private char[] userPassword;
 
 
     // SETTER Y GETTER para los caracteres
     public void setCharacters() {
-        this.characters = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+        this.characters = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     }
-
-    public String[] getCharacters() {
+    public char[] getCharacters() {
         return this.characters;
     }
 
 
     // SETTER Y GETTER para los caracteres especiales
     public void setSpecialCharacters() {
-        this.specialCharacters = new String[]{"|", "@", "#", "·", "$", "%", "&", "+", "-", "/", ".", ",", ";", ":"};
+        this.specialCharacters = new char[]{'!','@','#','$','%','*','(',')','_','+','-','=','[',']','{','}', '.',',','?'};
     }
-
-    public String[] getSpecialCharacters() {
+    public char[] getSpecialCharacters() {
         return this.specialCharacters;
     }
 
 
     // SETTER Y GETTER para los caracteres en mayúsculas
     public void setUpperCaseCharacters() {
-        this.upperCaseCharacters = new String[getCharacters().length];
+        this.upperCaseCharacters = new char[getCharacters().length];
         for (int i = 0; i < characters.length; i++) {
-            this.upperCaseCharacters[i] = this.getCharacters()[i].toUpperCase();
+            this.upperCaseCharacters[i] = Character.toUpperCase(this.getCharacters()[i]);
         }
     }
-
-    public String[] getUpperCaseCharacters() {
+    public char[] getUpperCaseCharacters() {
         return this.upperCaseCharacters;
     }
+
+    public void setNumbers() {
+        this.numbers = new char[]{'1','2','3','4','5','6','7','8','9','0'};
+    }
+    public char[] getNumbers() {
+        return this.numbers;
+    }
+
 
 
     // SETTER Y GETTER para la contraseña a generar
     public void setUserPassword(int length) {
-        this.userPassword = new String[length];
+        this.userPassword = new char[length];
     }
-
-    public String[] getUserPassword() {
+    public char[] getUserPassword() {
         return this.userPassword;
     }
 
@@ -62,6 +67,7 @@ public class Password {
         this.setCharacters();
         this.setSpecialCharacters();
         this.setUpperCaseCharacters();
+        this.setNumbers();
 
 
         // Colocar los caracteres de forma aleatoria confirmando que no se repitan de forma consecutiva
@@ -70,7 +76,7 @@ public class Password {
                 case 0:
                     this.userPassword[i] = this.getCharacters()[this.random.nextInt(this.getCharacters().length)];
                     if (i > 0) {
-                        while (this.userPassword[i].equals(this.userPassword[i - 1])) {
+                        while (this.userPassword[i] == this.userPassword[i - 1]) {
                             this.userPassword[i] = this.getCharacters()[this.random.nextInt(this.getCharacters().length)];
                         }
                     }
@@ -78,7 +84,7 @@ public class Password {
                 case 1:
                     this.userPassword[i] = this.getSpecialCharacters()[this.random.nextInt(this.getSpecialCharacters().length)];
                     if (i > 0) {
-                        while (this.userPassword[i].equals(this.userPassword[i - 1])) {
+                        while (this.userPassword[i] == this.userPassword[i - 1]) {
                             this.userPassword[i] = this.getSpecialCharacters()[this.random.nextInt(this.getSpecialCharacters().length)];
                         }
                     }
@@ -86,16 +92,16 @@ public class Password {
                 case 2:
                     this.userPassword[i] = this.getUpperCaseCharacters()[this.random.nextInt(this.getUpperCaseCharacters().length)];
                     if (i > 0) {
-                        while (this.userPassword[i].equals(this.userPassword[i - 1])) {
+                        while (this.userPassword[i] == this.userPassword[i - 1]) {
                             this.userPassword[i] = this.getUpperCaseCharacters()[this.random.nextInt(this.getUpperCaseCharacters().length)];
                         }
                     }
                     break;
                 case 3:
-                    this.userPassword[i] = Integer.toString(random.nextInt(10));
+                    this.userPassword[i] = this.getNumbers()[this.random.nextInt(this.getNumbers().length)];
                     if (i > 0) {
-                        while (this.userPassword[i].equals(this.userPassword[i - 1])) {
-                            this.userPassword[i] = Integer.toString(random.nextInt(10));
+                        while (this.userPassword[i] == this.userPassword[i - 1]) {
+                            this.userPassword[i] = this.getNumbers()[this.random.nextInt(this.getNumbers().length)];
                         }
                     }
                     break;
@@ -115,19 +121,19 @@ public class Password {
 
         for (int i = 0; i < this.getUserPassword().length; i++) {
             for (int j = 0; j < this.getSpecialCharacters().length; j++) {
-                if (this.getUserPassword()[i].equals(this.getSpecialCharacters()[j])) {
+                if (this.getUserPassword()[i] == this.getSpecialCharacters()[j]) {
                     special = true;
                     break;
                 }
             }
             for (int k = 0; k < this.getUpperCaseCharacters().length; k++) {
-                if (this.getUserPassword()[i].equals(this.getUpperCaseCharacters()[k])) {
+                if (this.getUserPassword()[i] == this.getUpperCaseCharacters()[k]) {
                     upper = true;
                     break;
                 }
             }
-            for (int l = 0; l < 10; l++) {
-                if (this.getUserPassword()[i].equals(Integer.toString(l))) {
+            for (int l = 0; l < this.getNumbers().length; l++) {
+                if (this.getUserPassword()[i] == this.getNumbers()[l]) {
                     number = true;
                     break;
                 }

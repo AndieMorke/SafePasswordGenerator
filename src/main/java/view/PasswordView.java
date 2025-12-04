@@ -42,6 +42,9 @@ public class PasswordView {
             }
 
         } while (option<1 || option >2);
+        if (option==2){
+            System.out.println("¡Hasta luego!");
+        }
         return option;
 
     }
