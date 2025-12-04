@@ -14,8 +14,8 @@ public class PasswordPanel extends JPanel {
 
     public PasswordPanel (){
 
-       setLayout(new BorderLayout(5,5));
-       setBorder(new EmptyBorder(10, 20, 10, 20)); // top, left, bottom, right
+       setLayout(new BorderLayout(10,10));
+       setBorder(new EmptyBorder(20, 20, 15, 20)); // top, left, bottom, right
 
        menu = new JPanel(new GridLayout(2,1));
         lengthPanel = new JPanel(new FlowLayout());
@@ -30,6 +30,7 @@ public class PasswordPanel extends JPanel {
             genPassword = new JButton("GENERAR");
             genPassword.setFont(new Font("Arial", Font.BOLD,16));
             genPassword.setBackground(new Color(200,200,200));
+            generate.setBorder(new EmptyBorder(0, 0, 20, 0));
 
         generate.add(genPassword);
        menu.add(generate);
@@ -38,6 +39,8 @@ public class PasswordPanel extends JPanel {
             showPassword.setEditable(false);
             showPassword.setFont(new Font("Arial", Font.BOLD, 28));
             showPassword.setHorizontalAlignment(JTextField.CENTER);
+            showPassword.setBorder(new EmptyBorder(30,0,0,0));
+            showPassword.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
        add(showPassword,BorderLayout.CENTER);
 
        copyrightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));

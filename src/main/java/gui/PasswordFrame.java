@@ -18,7 +18,7 @@ public class PasswordFrame extends JFrame {
         panel = new PasswordPanel();
         add(panel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,250);
+        this.setSize(500,300);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
@@ -43,8 +43,8 @@ public class PasswordFrame extends JFrame {
                     pwd.setUserPassword(length);
                     pwd.createUserPassword();
                     panel.getShowPassword().setText(new String(pwd.getUserPassword()));
-                    panel.getNumber().setText("");
-                    panel.getNumber().requestFocusInWindow();
+//                    panel.getNumber().setText("");
+//                    panel.getNumber().requestFocusInWindow();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Introduce un número válido");
                     panel.getNumber().setText("");
