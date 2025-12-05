@@ -97,14 +97,18 @@ public class Password {
                 }
             } while ((i > 0) && this.getUserPassword()[i] == this.getUserPassword()[i - 1]);
         }
-        if(!hasUpper){
-            this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getUpperCaseCharacters()[random.nextInt(this.getUpperCaseCharacters().length)];
-        }
-        if(!hasSpecial){
-            this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getSpecialCharacters()[random.nextInt(this.getSpecialCharacters().length)];
-        }
-        if(!hasNumber){
-            this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getNumbers()[random.nextInt(this.getNumbers().length)];
+
+        while(!hasUpper || !hasSpecial || !hasNumber){
+
+            if(!hasUpper){
+                this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getUpperCaseCharacters()[random.nextInt(this.getUpperCaseCharacters().length)];
+            }
+            if(!hasSpecial){
+                this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getSpecialCharacters()[random.nextInt(this.getSpecialCharacters().length)];
+            }
+            if(!hasNumber){
+                this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getNumbers()[random.nextInt(this.getNumbers().length)];
+            }
         }
     }
 }

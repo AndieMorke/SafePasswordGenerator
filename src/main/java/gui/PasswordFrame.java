@@ -1,7 +1,5 @@
 package gui;
-
 import model.Password;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,8 +41,6 @@ public class PasswordFrame extends JFrame {
                     pwd.setUserPassword(length);
                     pwd.createUserPassword();
                     panel.getShowPassword().setText(new String(pwd.getUserPassword()));
-//                    panel.getNumber().setText("");
-//                    panel.getNumber().requestFocusInWindow();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Introduce un número válido");
                     panel.getNumber().setText("");
