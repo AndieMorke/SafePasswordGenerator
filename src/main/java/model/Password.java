@@ -71,16 +71,18 @@ public class Password {
     // Crear una contraseña para el usuario
     public void createUserPassword() {
 
-        boolean hasNumber, hasSpecial, hasUpper;
+        boolean hasNumber, hasSpecial, hasUpper, hasLower;
         hasNumber = false;
         hasSpecial = false;
         hasUpper = false;
+        hasLower = false;
 
         for (int i = 0; i < this.getUserPassword().length; i++) {
             do {
                 switch (random.nextInt(4)) {
                     case 0:
                         this.userPassword[i] = this.getCharacters()[random.nextInt(this.getCharacters().length)];
+                        hasLower = true;
                         break;
                     case 1:
                         this.userPassword[i] = this.getUpperCaseCharacters()[random.nextInt(this.getUpperCaseCharacters().length)];
@@ -98,19 +100,28 @@ public class Password {
             } while ((i > 0) && this.getUserPassword()[i] == this.getUserPassword()[i - 1]);
         }
 
-        while(!hasUpper || !hasSpecial || !hasNumber){
+        while(!hasUpper || !hasSpecial || !hasNumber || !hasLower){
 
             if(!hasUpper){
                 this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getUpperCaseCharacters()[random.nextInt(this.getUpperCaseCharacters().length)];
+                hasUpper = true;
             }
             if(!hasSpecial){
                 this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getSpecialCharacters()[random.nextInt(this.getSpecialCharacters().length)];
+                hasSpecial = true;
             }
             if(!hasNumber){
                 this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getNumbers()[random.nextInt(this.getNumbers().length)];
+                hasNumber = true;
+            }
+            if(!hasLower){
+                this.userPassword[random.nextInt(this.getUserPassword().length)] = this.getCharacters()[random.nextInt(this.getCharacters().length)];
+                hasLower = true;
             }
         }
     }
+
+
 }
 
 

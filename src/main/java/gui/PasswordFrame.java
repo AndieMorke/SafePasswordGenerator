@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 public class PasswordFrame extends JFrame {
 
@@ -16,12 +19,16 @@ public class PasswordFrame extends JFrame {
         panel = new PasswordPanel();
         add(panel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,300);
+        this.setSize(500,400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
-        panel.getGenPassword().addActionListener(new ManagerPasswordFrame());
+        ManagerPasswordFrame manager = new ManagerPasswordFrame();
+        panel.getGenPassword().addActionListener(manager);
+        panel.getShowHiddenPasswordButton().addActionListener(manager);
     }
+
+
 
 
     private class ManagerPasswordFrame implements ActionListener {
@@ -46,6 +53,15 @@ public class PasswordFrame extends JFrame {
                     panel.getNumber().setText("");
                     panel.getNumber().requestFocusInWindow();
 
+                }
+            }
+            if (e.getSource() == panel.getShowHiddenPasswordButton()) {
+                if (panel.getShowPassword().getEchoChar() != 0) {
+                    panel.getShowPassword().setEchoChar((char) 0);
+                    panel.getShowHiddenPasswordButton().setText("Ocultar");
+                } else {
+                    panel.getShowPassword().setEchoChar('•');
+                    panel.getShowHiddenPasswordButton().setText("Mostrar");
                 }
             }
         }
