@@ -58,10 +58,10 @@ public class PasswordFrame extends JFrame {
             if (e.getSource() == panel.getShowHiddenPasswordButton()) {
                 if (panel.getShowPassword().getEchoChar() != 0) {
                     panel.getShowPassword().setEchoChar((char) 0);
-                    panel.getShowHiddenPasswordButton().setText("Ocultar");
+                    panel.getShowHiddenPasswordButton().setText("OCULTAR");
                 } else {
                     panel.getShowPassword().setEchoChar('•');
-                    panel.getShowHiddenPasswordButton().setText("Mostrar");
+                    panel.getShowHiddenPasswordButton().setText("MOSTRAR");
                 }
             }
         }

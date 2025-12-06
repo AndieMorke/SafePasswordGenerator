@@ -14,8 +14,8 @@ public class PasswordPanel extends JPanel {
 
     public PasswordPanel (){
 
-       setLayout(new BorderLayout(20,10));
-       setBorder(new EmptyBorder(10, 20, 10, 20)); // top, left, bottom, right
+       setLayout(new BorderLayout());
+       setBorder(new EmptyBorder(10, 20, 10, 20));
        //setBackground(new Color(255,218,185));
 
 
@@ -26,7 +26,9 @@ public class PasswordPanel extends JPanel {
         northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         label = new JLabel("CONTRASEÑA SEGURA\n");
         label.setFont(new Font("Arial", Font.BOLD,26));
+        label.setForeground(new Color(125,0,50));
         northPanel.add(label);
+        //northPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         add(northPanel,BorderLayout.NORTH);
 
 
@@ -51,6 +53,8 @@ public class PasswordPanel extends JPanel {
                 generatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                     genPasswordButton = new JButton("GENERAR");
                     genPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
+                    genPasswordButton.setForeground(Color.WHITE);
+                    genPasswordButton.setBackground(new Color(125,0,50));
                     genPasswordButton.setPreferredSize(new Dimension(125,50));
                 generatePanel.setBorder(new EmptyBorder(0, 0, 20, 0));
                 generatePanel.add(genPasswordButton);
@@ -65,13 +69,15 @@ public class PasswordPanel extends JPanel {
                 showPassword.setEditable(false);
                 showPassword.setFont(new Font("Arial", Font.BOLD, 28));
                 showPassword.setHorizontalAlignment(JTextField.CENTER);
-                showPassword.setBorder(new EmptyBorder(20,10,10,10));
-                showPassword.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-                showPassword.setBackground(new Color(250,250,250));
+                showPassword.setBorder(BorderFactory.createLineBorder(new Color(125,0,50)));
+
+        showPassword.setBackground(new Color(250,250,250));
 
                 // Botón [MOSTRAR]
             showPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 showHiddenPasswordButton = new JButton("MOSTRAR");
+                showHiddenPasswordButton.setBackground(new Color(125,0,50));
+                showHiddenPasswordButton.setForeground(Color.WHITE);
                 showHiddenPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
                 showHiddenPasswordButton.setPreferredSize(new Dimension(125,50));
                 showPanel.setBorder(new EmptyBorder(20,0,0,0));
@@ -94,6 +100,7 @@ public class PasswordPanel extends JPanel {
        copyright.setFont(new Font("Serif", Font.PLAIN,14));
        //southPanel.setBackground(new Color(255,218,185));
        southPanel.add(copyright);
+       //southPanel.setBorder(new EmptyBorder(0,0,5,10));
        add(southPanel,BorderLayout.SOUTH);
     }
 
