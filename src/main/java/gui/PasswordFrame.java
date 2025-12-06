@@ -19,7 +19,8 @@ public class PasswordFrame extends JFrame {
         panel = new PasswordPanel();
         add(panel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,450);
+        this.setSize(600,410);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
@@ -45,6 +46,13 @@ public class PasswordFrame extends JFrame {
                         panel.getNumber().requestFocusInWindow();
                         return;
                     }
+                    while (length > 30) {
+                        JOptionPane.showMessageDialog(null, "Introduce un número menor o igual que 30");
+                        panel.getNumber().setText("");
+                        panel.getNumber().requestFocusInWindow();
+                        return;
+                    }
+
                     pwd.setUserPassword(length);
                     pwd.createUserPassword();
                     panel.getShowPassword().setText(new String(pwd.getUserPassword()));

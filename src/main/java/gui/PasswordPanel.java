@@ -28,7 +28,7 @@ public class PasswordPanel extends JPanel {
         label.setFont(new Font("Arial", Font.BOLD,26));
         label.setForeground(new Color(125,0,50));
         northPanel.add(label);
-        //northPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        northPanel.setBorder(new EmptyBorder(10,0,0,0));
         add(northPanel,BorderLayout.NORTH);
 
 
@@ -91,16 +91,13 @@ public class PasswordPanel extends JPanel {
        add(centerPanel,BorderLayout.CENTER);
 
 
-
-        /*
+        /**
          * PANEL PRINCIPAL SUR - COPYRIGHT
-         * */
+         */
        southPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
        copyright = new JLabel("© Andie Mørke");
        copyright.setFont(new Font("Serif", Font.PLAIN,14));
-       //southPanel.setBackground(new Color(255,218,185));
        southPanel.add(copyright);
-       //southPanel.setBorder(new EmptyBorder(0,0,5,10));
        add(southPanel,BorderLayout.SOUTH);
     }
 
