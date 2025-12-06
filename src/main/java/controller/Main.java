@@ -9,28 +9,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+        try {
+            UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
+        }
+
+
         SwingUtilities.invokeLater(() -> {
             new PasswordFrame();
         });
-
-//        Password pwd = new Password();
-//        PasswordView view = new PasswordView();
-//        boolean exit = false;
-//
-//        do {
-//            if (view.menu() == 1) {
-//                pwd.setUserPassword(view.askLength());
-//                pwd.createUserPassword();
-//                view.showPassword(pwd);
-//
-//            } else exit = true;
-//
-//        }while (!exit);
-
-
-
-
-
 
 
     }

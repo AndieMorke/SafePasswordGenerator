@@ -19,7 +19,7 @@ public class PasswordFrame extends JFrame {
         panel = new PasswordPanel();
         add(panel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,400);
+        this.setSize(500,450);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
