@@ -21,7 +21,7 @@ public class PasswordFrame extends JFrame {
         panel = new PasswordPanel();
         add(panel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600,410);
+        this.setSize(600,375);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -43,13 +43,13 @@ public class PasswordFrame extends JFrame {
                 int length;
                 try {
                     length = Integer.parseInt(panel.getNumber().getText());
-                    while (length < 6) {
-                        JOptionPane.showMessageDialog(null, "Introduce un número mayor o igual que 6");
+                    if (length < 6) {
+                        JOptionPane.showMessageDialog(null, "Introduce un número igual o mayor que 6");
                         panel.getNumber().setText("");
                         panel.getNumber().requestFocusInWindow();
                         return;
                     }
-                    while (length > 30) {
+                    if (length > 30) {
                         JOptionPane.showMessageDialog(null, "Introduce un número menor o igual que 30");
                         panel.getNumber().setText("");
                         panel.getNumber().requestFocusInWindow();
