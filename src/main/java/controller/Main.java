@@ -1,8 +1,5 @@
 package controller;
 import gui.PasswordFrame;
-import model.Password;
-import view.PasswordView;
-
 import javax.swing.*;
 
 public class Main {
@@ -16,9 +13,7 @@ public class Main {
         }
 
 
-        SwingUtilities.invokeLater(() -> {
-            new PasswordFrame();
-        });
+        SwingUtilities.invokeLater(PasswordFrame::new);
 
 
     }

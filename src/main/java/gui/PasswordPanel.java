@@ -8,7 +8,7 @@ public class PasswordPanel extends JPanel {
     private JLabel length,copyright,label;
     private JTextField number;
     private JButton genPasswordButton,showHiddenPasswordButton;
-    private JPasswordField showPassword;
+    private JTextField showPassword;
     private JPanel lengthPanel,menuPanel,generatePanel,showPanel,southPanel,northPanel,centerPanel;
 
 
@@ -65,7 +65,7 @@ public class PasswordPanel extends JPanel {
             menuPanel.add(generatePanel);
 
             // Campo contraseña
-                showPassword = new JPasswordField();
+                showPassword = new JTextField();
                 showPassword.setEditable(false);
                 showPassword.setFont(new Font("Arial", Font.BOLD, 28));
                 showPassword.setHorizontalAlignment(JTextField.CENTER);
@@ -108,7 +108,7 @@ public class PasswordPanel extends JPanel {
     public JButton getGenPassword() {
         return this.genPasswordButton;
     }
-    public JPasswordField getShowPassword() {
+    public JTextField getShowPassword() {
         return this.showPassword;
     }
     public JButton getShowHiddenPasswordButton() {

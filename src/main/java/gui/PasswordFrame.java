@@ -11,10 +11,12 @@ import java.awt.event.MouseEvent;
 public class PasswordFrame extends JFrame {
 
     private PasswordPanel panel;
+    private char[] generatedPassword;
 
     public PasswordFrame() {
 
         super("PASSWORD GEN");
+
 
         panel = new PasswordPanel();
         add(panel);
@@ -35,6 +37,7 @@ public class PasswordFrame extends JFrame {
     private class ManagerPasswordFrame implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+
             if (e.getSource() == panel.getGenPassword()) {
                 Password pwd = new Password();
                 int length;
@@ -55,7 +58,14 @@ public class PasswordFrame extends JFrame {
 
                     pwd.setUserPassword(length);
                     pwd.createUserPassword();
-                    panel.getShowPassword().setText(new String(pwd.getUserPassword()));
+                    generatedPassword = pwd.getUserPassword();
+
+                    if(panel.getShowHiddenPasswordButton().getText().equals("MOSTRAR")) {
+                        panel.getShowPassword().setText("*".repeat(generatedPassword.length));
+                    }else panel.getShowPassword().setText(new String(generatedPassword));
+
+
+
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Introduce un número válido");
                     panel.getNumber().setText("");
@@ -64,14 +74,18 @@ public class PasswordFrame extends JFrame {
                 }
             }
             if (e.getSource() == panel.getShowHiddenPasswordButton()) {
-                if (panel.getShowPassword().getEchoChar() != 0) {
-                    panel.getShowPassword().setEchoChar((char) 0);
+                if (generatedPassword == null) return;
+
+                if (panel.getShowHiddenPasswordButton().getText().equals("MOSTRAR")) {
+                    panel.getShowPassword().setText(new String(generatedPassword));
                     panel.getShowHiddenPasswordButton().setText("OCULTAR");
+
                 } else {
-                    panel.getShowPassword().setEchoChar('•');
+                    panel.getShowPassword().setText("*".repeat(generatedPassword.length));
                     panel.getShowHiddenPasswordButton().setText("MOSTRAR");
                 }
             }
+
         }
     }
 
