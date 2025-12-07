@@ -5,12 +5,10 @@ import java.awt.*;
 
 public class PasswordPanel extends JPanel {
 
-    private JLabel length,copyright,label;
-    private JTextField number;
-    private JButton genPasswordButton,showHiddenPasswordButton,copyPasswordButton;
-    private JTextField showPassword;
-    private JPanel lengthPanel,menuPanel,generatePanel,showPanel,southPanel,northPanel,centerPanel,copyPasswordPanel,showCopyPanel;
 
+    private JTextField lengthField;
+    private JButton genPasswordButton,showHiddenPasswordButton,copyPasswordButton;
+    private JTextField showPasswordField;
 
     public PasswordPanel (){
 
@@ -23,39 +21,38 @@ public class PasswordPanel extends JPanel {
         /*
          * PANEL PRINCIPAL NORTE - TÍTULO
          * */
-        northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        label = new JLabel("CONTRASEÑA SEGURA\n");
-        label.setFont(new Font("Arial", Font.BOLD,26));
-        label.setForeground(new Color(125,0,50));
-        northPanel.add(label);
-        //northPanel.setBorder(new EmptyBorder(10,0,0,0));
+        JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel title = new JLabel("CONTRASEÑA SEGURA\n");
+        title.setFont(new Font("Arial", Font.BOLD,26));
+        title.setForeground(new Color(102,0,51));
+        northPanel.add(title);
         add(northPanel,BorderLayout.NORTH);
 
 
         /*
         * PANEL PRINCIPAL CENTRO - MENÚ
         * */
-        centerPanel = new JPanel(new BorderLayout(0,20));
-            menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
+        JPanel centerPanel = new JPanel(new BorderLayout(0,20));
+            JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
 
             // Menú longitud
-                    lengthPanel = new JPanel();
-                        length = new JLabel("Introduzca la longitud deseada: ");
+                    JPanel lengthPanel = new JPanel();
+                        JLabel length = new JLabel("Introduzca la longitud deseada: ");
                         length.setFont(new Font("Arial", Font.PLAIN,16));
-                        number = new JTextField(3);
-                        number.setFont(new Font("Arial", Font.PLAIN,16));
-                        number.setPreferredSize(new Dimension(50,25));
-                        number.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+                        lengthField = new JTextField(3);
+                        lengthField.setFont(new Font("Arial", Font.PLAIN,16));
+                        lengthField.setPreferredSize(new Dimension(50,25));
+                        lengthField.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
                     lengthPanel.add(length);
-                    lengthPanel.add(number);
+                    lengthPanel.add(lengthField);
                     lengthPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
             // Botón [GENERAR]
-                generatePanel = new JPanel();
+                JPanel generatePanel = new JPanel();
                     genPasswordButton = new JButton("GENERAR");
                     genPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
                     genPasswordButton.setForeground(Color.WHITE);
-                    genPasswordButton.setBackground(new Color(125,0,50));
+                    genPasswordButton.setBackground(new Color(102,0,51));
                     genPasswordButton.setPreferredSize(new Dimension(120,50));
                 generatePanel.add(genPasswordButton);
 
@@ -63,39 +60,41 @@ public class PasswordPanel extends JPanel {
             menuPanel.add(generatePanel);
 
             // Campo contraseña
-                showPassword = new JTextField();
-                showPassword.setEditable(false);
-                showPassword.setFont(new Font("Arial", Font.BOLD, 28));
-                showPassword.setHorizontalAlignment(JTextField.CENTER);
-                showPassword.setBorder(BorderFactory.createLineBorder(new Color(125,0,50),1,true));
-                showPassword.setBackground(new Color(250,250,250));
-                showCopyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
+                showPasswordField = new JTextField();
+                showPasswordField.setEditable(false);
+                showPasswordField.setFont(new Font("Monospaced", Font.BOLD, 28));
+                showPasswordField.setHorizontalAlignment(JTextField.CENTER);
+                showPasswordField.setBorder(BorderFactory.createLineBorder(new Color(102,0,51),1,true));
+                showPasswordField.setBackground(new Color(250,250,250));
 
 
-            // Botón [MOSTRAR]
-            showPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+
+            // Botones [MOSTRAR] y [COPIAR]
+        JPanel showCopyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
+            JPanel showPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                 showHiddenPasswordButton = new JButton("MOSTRAR");
-                showHiddenPasswordButton.setBackground(new Color(125,0,50));
+                showHiddenPasswordButton.setBackground(new Color(102,0,51));
                 showHiddenPasswordButton.setForeground(Color.WHITE);
                 showHiddenPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
                 showHiddenPasswordButton.setPreferredSize(new Dimension(125,50));
                 //showPanel.setBorder(new EmptyBorder(20,0,0,0));
             showPanel.add(showHiddenPasswordButton);
+        showCopyPanel.add(showPanel);
 
             // Botón [COPIAR]
-            copyPasswordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            JPanel copyPasswordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             copyPasswordButton = new JButton("COPIAR");
-            copyPasswordButton.setBackground(new Color(125,0,50));
+            copyPasswordButton.setBackground(new Color(102,0,51));
             copyPasswordButton.setForeground(Color.WHITE);
             copyPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
             copyPasswordButton.setPreferredSize(new Dimension(125,50));
             copyPasswordPanel.add(copyPasswordButton);
-            showCopyPanel.add(showPanel);
             showCopyPanel.add(copyPasswordPanel);
 
 
         centerPanel.add(menuPanel,BorderLayout.NORTH);
-        centerPanel.add(showPassword,BorderLayout.CENTER);
+        centerPanel.add(showPasswordField,BorderLayout.CENTER);
         centerPanel.add(showCopyPanel,BorderLayout.SOUTH);
 
        add(centerPanel,BorderLayout.CENTER);
@@ -104,25 +103,28 @@ public class PasswordPanel extends JPanel {
        /**
        * PANEL PRINCIPAL SUR - COPYRIGHT
        */
-       southPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-       copyright = new JLabel("© Andie Mørke");
+       JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+       JLabel copyright = new JLabel("© Andie Mørke");
        copyright.setFont(new Font("Serif", Font.PLAIN,14));
        southPanel.add(copyright);
        add(southPanel,BorderLayout.SOUTH);
     }
 
     // GETTERS
-    public JTextField getNumber() {
-        return this.number;
+    public JTextField getLengthField() {
+        return this.lengthField;
     }
-    public JButton getGenPassword() {
+    public JButton getGenPasswordButton() {
         return this.genPasswordButton;
     }
-    public JTextField getShowPassword() {
-        return this.showPassword;
+    public JTextField getShowPasswordField() {
+        return this.showPasswordField;
     }
     public JButton getShowHiddenPasswordButton() {
         return this.showHiddenPasswordButton;
+    }
+    public JButton getCopyPasswordButton() {
+        return this.copyPasswordButton;
     }
 }
 
