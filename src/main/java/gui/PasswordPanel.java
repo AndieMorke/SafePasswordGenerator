@@ -39,11 +39,16 @@ public class PasswordPanel extends JPanel {
                     JPanel lengthPanel = new JPanel();
                         JLabel length = new JLabel("Introduzca la longitud deseada: ");
                         length.setFont(new Font("Arial", Font.PLAIN,16));
-                        lengthField = new JTextField(3);
+                        lengthField = new JTextField(2);
                         lengthField.setFont(new Font("Arial", Font.PLAIN,16));
                         lengthField.setPreferredSize(new Dimension(50,25));
-                        lengthField.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-                    lengthPanel.add(length);
+                        lengthField.setBorder(BorderFactory.createCompoundBorder(
+                            BorderFactory.createLineBorder(Color.LIGHT_GRAY),      // borde externo
+                            BorderFactory.createEmptyBorder(0, 5, 0, 0)            // padding interno
+                )
+        );
+
+        lengthPanel.add(length);
                     lengthPanel.add(lengthField);
                     lengthPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
