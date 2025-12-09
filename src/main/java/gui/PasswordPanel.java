@@ -62,7 +62,7 @@ public class PasswordPanel extends JPanel {
             // Campo contraseña
                 showPasswordField = new JTextField();
                 showPasswordField.setEditable(false);
-                showPasswordField.setFont(new Font("Monospaced", Font.BOLD, 28));
+                showPasswordField.setFont(new Font("Monospaced", Font.PLAIN, 35));
                 showPasswordField.setHorizontalAlignment(JTextField.CENTER);
                 showPasswordField.setBorder(BorderFactory.createLineBorder(new Color(102,0,51),1,true));
                 showPasswordField.setBackground(new Color(250,250,250));
