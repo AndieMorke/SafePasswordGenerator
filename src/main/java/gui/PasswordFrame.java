@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 public class PasswordFrame extends JFrame {
@@ -44,14 +42,11 @@ public class PasswordFrame extends JFrame {
                 int length;
                 try {
                     length = Integer.parseInt(panel.getLengthField().getText());
-                    if (length < 6) {
-                        JOptionPane.showMessageDialog(null, "Introduce un número igual o mayor que 6");
-                        panel.getLengthField().setText("");
-                        panel.getLengthField().requestFocusInWindow();
-                        return;
-                    }
-                    if (length > 30) {
-                        JOptionPane.showMessageDialog(null, "Introduce un número menor o igual que 30");
+                    if (length < 6 || length > 30) {
+                        String mensaje = (length < 6) ? 
+                            "Introduce un número igual o mayor que 6" : 
+                            "Introduce un número menor o igual que 30";
+                        JOptionPane.showMessageDialog(null, mensaje);
                         panel.getLengthField().setText("");
                         panel.getLengthField().requestFocusInWindow();
                         return;

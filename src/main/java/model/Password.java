@@ -8,10 +8,15 @@ public class Password {
     private char[] numbers = "0123456789".toCharArray();
     private char[] specialCharacters = "!@#$%*()_+-=[]{}.,?".toCharArray();
     private char[] upperCaseCharacters;
+
     private char[] userPassword;
+
     private final Random RANDOM;
+
     private boolean hasLower,hasUpper,hasSpecial,hasNumber;
+
     private enum CharType {LOWER,UPPER,SPECIAL,NUMBER}
+
 
     public Password() {
 
@@ -36,31 +41,34 @@ public class Password {
         return this.upperCaseCharacters;
     }
 
-
     public boolean hasNumber() {
         return this.hasNumber;
     }
     public void setHasNumber(boolean hasNumber) {
         this.hasNumber = hasNumber;
     }
+
     public boolean hasSpecial() {
         return this.hasSpecial;
     }
     public void setHasSpecial(boolean hasSpecial) {
         this.hasSpecial = hasSpecial;
     }
+
     public boolean hasUpper() {
         return this.hasUpper;
     }
     public void setHasUpper(boolean hasUpper) {
         this.hasUpper = hasUpper;
     }
+
     public boolean hasLower() {
         return this.hasLower;
     }
     public void setHasLower(boolean hasLower) {
         this.hasLower = hasLower;
     }
+
     public void setUserPassword(int length) {
         this.userPassword = new char[length];
     }
@@ -68,12 +76,20 @@ public class Password {
         return this.userPassword;
     }
 
-    public void setRandomCharacter(int index,char[] array){
-        this.userPassword[index] = this.getRandomCharacter(array);
+
+    public void createUserPassword() {
+
+
+        for (int i = 0; i < this.getUserPassword().length; i++) {
+
+            do {
+                this.setRandomCharacter(i,this.getRandomCharacterType());
+            } while (this.areConsecutive(i));
+        }
+
+        this.fillMissingCharacterTypes();
     }
-    public char getRandomCharacter(char[] array){
-        return array[RANDOM.nextInt(array.length)];
-    }
+
     public void setRandomIndexAndRandomCharacter(char[] charArray) {
         int randomIndex;
         char randomChar;
@@ -84,6 +100,7 @@ public class Password {
                 || (randomIndex < userPassword.length - 1 && this.userPassword[randomIndex + 1] == randomChar));
         this.userPassword[randomIndex] = randomChar;
     }
+
     public char[] getRandomCharacterType(){
         CharType charType = CharType.values()[RANDOM.nextInt(CharType.values().length)];
         return switch (charType) {
@@ -93,14 +110,23 @@ public class Password {
             case NUMBER -> this.getNumbers();
         };
     }
+
+
+    public char getRandomCharacter(char[] array){
+        return array[RANDOM.nextInt(array.length)];
+    }
+    public void setRandomCharacter(int index,char[] array){
+        this.userPassword[index] = this.getRandomCharacter(array);
+    }
+
     public int getRandomIndex(){
         return RANDOM.nextInt(this.getUserPassword().length);
     }
 
-
     public boolean areConsecutive(int position){
         return ((position > 0) && (this.getUserPassword()[position] == this.getUserPassword()[position - 1]));
     }
+
     public void fillMissingCharacterTypes(){
         while(!this.hasUpper() || !this.hasLower() || !this.hasSpecial() || !this.hasNumber()){
             if(!this.hasUpper()){
@@ -121,33 +147,4 @@ public class Password {
             }
         }
     }
-
-
-    public void createUserPassword() {
-
-
-        for (int i = 0; i < this.getUserPassword().length; i++) {
-
-            do {
-                this.setRandomCharacter(i,this.getRandomCharacterType());
-            } while (this.areConsecutive(i));
-        }
-
-        this.fillMissingCharacterTypes();
-    }
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
+}
