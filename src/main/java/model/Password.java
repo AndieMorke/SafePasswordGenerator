@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 /**
  * Clase para generar contraseñas aleatorias con letras, números y símbolos.
@@ -23,7 +23,7 @@ public class Password {
     private char[] userPassword;
 
     /** Generador de números aleatorios */
-    private final Random RANDOM;
+    private final SecureRandom RANDOM;
 
     /** Banderas que indican la presencia de cada tipo de carácter */
     private boolean hasLower, hasUpper, hasSpecial, hasNumber;
@@ -39,7 +39,7 @@ public class Password {
         for (int i = 0; i < lowerCaseCharacters.length; i++) {
             upperCaseCharacters[i] = Character.toUpperCase(lowerCaseCharacters[i]);
         }
-        RANDOM = new Random();
+        RANDOM = new SecureRandom();
     }
 
     /** Getters de arrays de caracteres */
