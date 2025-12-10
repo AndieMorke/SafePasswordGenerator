@@ -4,6 +4,8 @@ import gui.PasswordFrame;
 import model.PasswordRecord;
 import model.PasswordManager;
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.SQLException;

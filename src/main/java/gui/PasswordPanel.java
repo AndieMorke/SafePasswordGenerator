@@ -83,7 +83,6 @@ public class PasswordPanel extends JPanel {
                 showHiddenPasswordButton.setForeground(Color.WHITE);
                 showHiddenPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
                 showHiddenPasswordButton.setPreferredSize(new Dimension(125,50));
-                //showPanel.setBorder(new EmptyBorder(20,0,0,0));
             showPanel.add(showHiddenPasswordButton);
         showCopyPanel.add(showPanel);
 

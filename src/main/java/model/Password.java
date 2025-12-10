@@ -37,7 +37,6 @@ public class Password {
      */
     private final SecureRandom RANDOM;
 
-
     /**
      * Constructor que inicializa caracteres en mayúscula y generador aleatorio.
      */
@@ -47,25 +46,6 @@ public class Password {
             upperCaseCharacters[i] = Character.toUpperCase(lowerCaseCharacters[i]);
         }
         RANDOM = new SecureRandom();
-    }
-
-    /**
-     * Getters de arrays de caracteres
-     */
-    public char[] getLowerCaseCharacters() {
-        return lowerCaseCharacters;
-    }
-
-    public char[] getNumbers() {
-        return numbers;
-    }
-
-    public char[] getSpecialCharacters() {
-        return specialCharacters;
-    }
-
-    public char[] getUpperCaseCharacters() {
-        return upperCaseCharacters;
     }
 
     /**
@@ -87,10 +67,10 @@ public class Password {
      */
     public char[] getRandomCharacterType() {
         return switch (RANDOM.nextInt(3)){
-            case 0 -> getLowerCaseCharacters();
-            case 1 -> getUpperCaseCharacters();
-            case 2 -> getNumbers();
-            default -> getLowerCaseCharacters();
+            case 0 -> upperCaseCharacters;
+            case 1 -> numbers;
+            case 2 -> lowerCaseCharacters;
+            default -> lowerCaseCharacters;
         };
     }
 
@@ -126,10 +106,10 @@ public class Password {
 
     public void generatePassword(int length) {
         setGeneratedPassword(length);
-        setRandomChar(getLowerCaseCharacters());
-        setRandomChar(getUpperCaseCharacters());
-        setRandomChar(getSpecialCharacters());
-        setRandomChar(getNumbers());
+        setRandomChar(lowerCaseCharacters);
+        setRandomChar(upperCaseCharacters);
+        setRandomChar(specialCharacters);
+        setRandomChar(numbers);
 
         for (int i = 0; i < generatedPassword.length; i++) {
             if (generatedPassword[i] == '\0') {
