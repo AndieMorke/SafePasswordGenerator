@@ -38,23 +38,21 @@ public class PasswordFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource() == panel.getGenPasswordButton()) {
-                Password pwd = new Password();
+                Password password = new Password();
                 int length;
                 try {
                     length = Integer.parseInt(panel.getLengthField().getText());
                     if (length < 6 || length > 30) {
-                        String mensaje = (length < 6) ? 
+                        String message = (length < 6) ?
                             "Introduce un número igual o mayor que 6" : 
                             "Introduce un número menor o igual que 30";
-                        JOptionPane.showMessageDialog(null, mensaje);
+                        JOptionPane.showMessageDialog(null, message);
                         panel.getLengthField().setText("");
                         panel.getLengthField().requestFocusInWindow();
                         return;
                     }
-
-                    pwd.setUserPassword(length);
-                    pwd.createUserPassword();
-                    generatedPassword = pwd.getUserPassword();
+                    password.generatePassword(length);
+                    generatedPassword = password.getGeneratedPassword();
 
                     if(panel.getShowHiddenPasswordButton().getText().equals("MOSTRAR")) {
                         panel.getShowPasswordField().setText("*".repeat(generatedPassword.length));
