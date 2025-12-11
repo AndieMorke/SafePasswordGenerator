@@ -152,13 +152,9 @@ public class Password {
         setRandomCharacter(NUMBER);
 
         // Rellena el resto de posiciones vacías
-        for (char character : generatedPassword) {
-            if (character == '\0') {
-                int position;
-                do {
-                    position = getRandomIndex();
-                } while (generatedPassword[position] != '\0');
-                setRandomCharacterAtIndex(position, getRandomCharacterType());
+        for (int i = 0; i < generatedPassword.length; i++) {
+            if (generatedPassword[i] == '\0') {
+                setRandomCharacterAtIndex(i, getRandomCharacterType());
             }
         }
     }
