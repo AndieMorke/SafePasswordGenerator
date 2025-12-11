@@ -1,6 +1,8 @@
 package gui;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
 public class PasswordPanel extends JPanel {
@@ -10,22 +12,52 @@ public class PasswordPanel extends JPanel {
     private final JSlider LENGTH_SLIDER;
     private final JButton GENERATE_BUTTON,SHOW_BUTTON,COPY_BUTTON;
 
+    public JButton createButton(String text,Dimension size){
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD,16));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(102,0,51));
+        button.setPreferredSize(new Dimension(size));
+        return button;
+    }
+
+    public JTextField createTextField(String text, int columns, Font font, Dimension size, Color background, Border border) {
+        JTextField field = new JTextField(columns);
+        if (text != null) field.setText(text);
+
+        field.setFont(font);
+        field.setEditable(false);
+        field.setFocusable(false);
+        field.setCursor(null);
+        field.getCaret().setBlinkRate(0);
+        field.getCaret().setVisible(false);
+
+        if (size != null) field.setPreferredSize(size);
+        if (background != null) field.setBackground(background);
+        if (border != null) field.setBorder(border);
+
+        return field;
+    }
+
+    public JLabel createLabel(String text,Font font,Color foreground){
+        JLabel label = new JLabel(text);
+        label.setFont(font);
+        label.setForeground(foreground);
+        return label;
+    }
+
     public PasswordPanel (){
 
        setLayout(new BorderLayout(0,10));
        setBorder(new EmptyBorder(10, 20, 10, 20));
-       //setBackground(new Color(255,218,185));
-
 
 
         /*
          * PANEL PRINCIPAL NORTE - TÍTULO
          * */
-        JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel title = new JLabel("CONTRASEÑA SEGURA\n");
-        title.setFont(new Font("Arial", Font.BOLD,26));
-        title.setForeground(new Color(102,0,51));
-        northPanel.add(title);
+            JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            JLabel title = createLabel("CONTRASEÑA SEGURA",new Font("Arial", Font.BOLD,26),new Color(102,0,51));
+            northPanel.add(title);
         add(northPanel,BorderLayout.NORTH);
 
 
@@ -42,19 +74,10 @@ public class PasswordPanel extends JPanel {
                         // Label LONGITUD
                         JLabel length = new JLabel("Elija la longitud deseada: ");
                             length.setFont(new Font("Arial", Font.PLAIN,16));
+                            length.setForeground(Color.DARK_GRAY);
                         // Field LONGITUD
-                        LENGTH_FIELD = new JTextField(2);
-                            LENGTH_FIELD.setText("12");
-                            LENGTH_FIELD.setFont(new Font("Arial", Font.PLAIN,16));
-                            LENGTH_FIELD.setEditable(false);
-                            LENGTH_FIELD.setFocusable(false);
-                            LENGTH_FIELD.setCursor(null);
-                            LENGTH_FIELD.getCaret().setBlinkRate(0);
-                            LENGTH_FIELD.getCaret().setVisible(false);
-                            LENGTH_FIELD.setPreferredSize(new Dimension(50,25));
-                            LENGTH_FIELD.setBorder(BorderFactory.createCompoundBorder(
-                                            BorderFactory.createLineBorder(Color.LIGHT_GRAY), 
-                                            BorderFactory.createEmptyBorder(0, 5, 0, 0)));
+        LENGTH_FIELD = createTextField("12", 2, new Font("Arial", Font.PLAIN, 16), new Dimension(50,25), Color.WHITE, BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY,1,true), BorderFactory.createEmptyBorder(0,5,0,0)));
+        LENGTH_FIELD.setForeground(Color.DARK_GRAY);
                         // Slider LONGITUD
                         LENGTH_SLIDER = new JSlider(6,30,12);
                             LENGTH_SLIDER.setBackground(new Color(102,0,51));
@@ -68,48 +91,34 @@ public class PasswordPanel extends JPanel {
 
             // Botón [GENERAR]
                 JPanel generatePanel = new JPanel();
-                    GENERATE_BUTTON = new JButton("GENERAR");
-                    GENERATE_BUTTON.setFont(new Font("Arial", Font.BOLD,16));
-                    GENERATE_BUTTON.setForeground(Color.WHITE);
-                    GENERATE_BUTTON.setBackground(new Color(102,0,51));
-                    GENERATE_BUTTON.setPreferredSize(new Dimension(120,50));
-                generatePanel.setBorder(new EmptyBorder(20, 0, 0, 0)); // 10 píxeles arriba
+                GENERATE_BUTTON = createButton("GENERAR",new Dimension(120,50));
+                generatePanel.setBorder(new EmptyBorder(20, 0, 0, 0));
                 generatePanel.add(GENERATE_BUTTON);
 
             menuPanel.add(lengthPanel);
             menuPanel.add(generatePanel);
 
             // Campo contraseña
-                PASSWORD_FIELD = new JTextField();
-                PASSWORD_FIELD.setEditable(false);
-                PASSWORD_FIELD.setFont(new Font("Monospaced", Font.PLAIN, 32));
-                PASSWORD_FIELD.setHorizontalAlignment(JTextField.CENTER);
-                PASSWORD_FIELD.setBorder(BorderFactory.createLineBorder(new Color(102,0,51),1,true));
-                PASSWORD_FIELD.setBackground(new Color(250,250,250));
+        PASSWORD_FIELD = createTextField("", 0, new Font("Monospaced", Font.PLAIN, 28), new Dimension(400,50), new Color(250,250,250), BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2, true));
+        PASSWORD_FIELD.setForeground(Color.DARK_GRAY);
+        PASSWORD_FIELD.setHorizontalAlignment(JTextField.CENTER);
 
 
 
 
-            // Botones [MOSTRAR] y [COPIAR]
+
+        // Botones [MOSTRAR] y [COPIAR]
         JPanel showCopyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
             JPanel showPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                SHOW_BUTTON = new JButton("MOSTRAR");
-                SHOW_BUTTON.setBackground(new Color(102,0,51));
-                SHOW_BUTTON.setForeground(Color.WHITE);
-                SHOW_BUTTON.setFont(new Font("Arial", Font.BOLD,16));
-                SHOW_BUTTON.setPreferredSize(new Dimension(125,50));
+                SHOW_BUTTON = createButton("MOSTRAR",new Dimension(120,50));
             showPanel.add(SHOW_BUTTON);
         showCopyPanel.add(showPanel);
 
             // Botón [COPIAR]
             JPanel copyPasswordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            COPY_BUTTON = new JButton("COPIAR");
-            COPY_BUTTON.setBackground(new Color(102,0,51));
-            COPY_BUTTON.setForeground(Color.WHITE);
-            COPY_BUTTON.setFont(new Font("Arial", Font.BOLD,16));
-            COPY_BUTTON.setPreferredSize(new Dimension(125,50));
+                COPY_BUTTON = createButton("COPIAR",new Dimension(120,50));
             copyPasswordPanel.add(COPY_BUTTON);
-            showCopyPanel.add(copyPasswordPanel);
+        showCopyPanel.add(copyPasswordPanel);
 
 
         centerPanel.add(menuPanel,BorderLayout.NORTH);
@@ -123,8 +132,7 @@ public class PasswordPanel extends JPanel {
        * PANEL PRINCIPAL SUR - COPYRIGHT
        */
        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-       JLabel copyright = new JLabel("© Andie Mørke");
-       copyright.setFont(new Font("Serif", Font.PLAIN,14));
+       JLabel copyright = createLabel("© Andie Mørke",new Font("Serif", Font.PLAIN,14), Color.DARK_GRAY);
        southPanel.add(copyright);
        add(southPanel,BorderLayout.SOUTH);
     }

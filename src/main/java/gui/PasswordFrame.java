@@ -16,7 +16,6 @@ public class PasswordFrame extends JFrame {
 
         super("PASSWORD GEN");
 
-
         PANEL = new PasswordPanel();
         add(PANEL);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,11 +55,9 @@ public class PasswordFrame extends JFrame {
             @Override public void removeUpdate(javax.swing.event.DocumentEvent e) { updateSlider(); }
             @Override public void changedUpdate(javax.swing.event.DocumentEvent e) { updateSlider(); }
         });
-
     }
 
     private class ManagerPasswordFrame implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -86,7 +83,6 @@ public class PasswordFrame extends JFrame {
                     PANEL.getShowButton().setText("MOSTRAR");
                 }
             }
-
             if(e.getSource() == PANEL.getCopyButton()){
                 if(generatedPassword == null) return;
 
