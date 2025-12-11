@@ -2,13 +2,14 @@ package gui;
 import model.Password;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 public class PasswordFrame extends JFrame {
 
-    private PasswordPanel panel;
+    private final PasswordPanel PANEL;
     private char[] generatedPassword;
 
     public PasswordFrame() {
@@ -16,86 +17,91 @@ public class PasswordFrame extends JFrame {
         super("PASSWORD GEN");
 
 
-        panel = new PasswordPanel();
-        add(panel);
+        PANEL = new PasswordPanel();
+        add(PANEL);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600,375);
+        this.setSize(600,425);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
         ManagerPasswordFrame manager = new ManagerPasswordFrame();
-        panel.getGenPasswordButton().addActionListener(manager);
-        panel.getShowHiddenPasswordButton().addActionListener(manager);
-        panel.getCopyPasswordButton().addActionListener(manager);
+
+        PANEL.getGenerateButton().addActionListener(manager);
+        PANEL.getShowButton().addActionListener(manager);
+        PANEL.getPasswordField().addActionListener(manager);
+        PANEL.getCopyButton().addActionListener(manager);
+
+        // Slider → TextField
+        PANEL.getLengthSlider().addChangeListener(e -> {
+            int value = PANEL.getLengthSlider().getValue();
+            if (!PANEL.getLengthField().getText().equals(String.valueOf(value))) {
+                PANEL.getLengthField().setText(String.valueOf(value));
+            }
+        });
+
+        // TextField → Slider
+        PANEL.getLengthField().getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            private void updateSlider() {
+                try {
+                    int value = Integer.parseInt(PANEL.getLengthField().getText());
+                    if (value >= PANEL.getLengthSlider().getMinimum() && value <= PANEL.getLengthSlider().getMaximum()) {
+                        if (PANEL.getLengthSlider().getValue() != value) {
+                            PANEL.getLengthSlider().setValue(value);
+                        }
+                    }
+                } catch (NumberFormatException ignored) {}
+            }
+            @Override public void insertUpdate(javax.swing.event.DocumentEvent e) { updateSlider(); }
+            @Override public void removeUpdate(javax.swing.event.DocumentEvent e) { updateSlider(); }
+            @Override public void changedUpdate(javax.swing.event.DocumentEvent e) { updateSlider(); }
+        });
+
     }
 
-
-
-
     private class ManagerPasswordFrame implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (e.getSource() == panel.getGenPasswordButton()) {
+            if (e.getSource() == PANEL.getGenerateButton()) {
                 Password password = new Password();
-                int length;
-                try {
-                    length = Integer.parseInt(panel.getLengthField().getText());
-                    if (length < 6 || length > 30) {
-                        String message = (length < 6) ?
-                            "Introduce un número igual o mayor que 6" : 
-                            "Introduce un número menor o igual que 30";
-                        JOptionPane.showMessageDialog(null, message);
-                        panel.getLengthField().setText("");
-                        panel.getLengthField().requestFocusInWindow();
-                        return;
-                    }
+                int length = Integer.parseInt(PANEL.getLengthField().getText());
                     password.generatePassword(length);
                     generatedPassword = password.getGeneratedPassword();
 
-                    if(panel.getShowHiddenPasswordButton().getText().equals("MOSTRAR")) {
-                        panel.getShowPasswordField().setText("*".repeat(generatedPassword.length));
-                    }else panel.getShowPasswordField().setText(new String(generatedPassword));
-
-
-
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Introduce un número válido");
-                    panel.getLengthField().setText("");
-                    panel.getLengthField().requestFocusInWindow();
-
-                }
+                    if(PANEL.getShowButton().getText().equals("MOSTRAR")) {
+                        PANEL.getPasswordField().setText("*".repeat(generatedPassword.length));
+                    }else PANEL.getPasswordField().setText(new String(generatedPassword));
             }
-            if (e.getSource() == panel.getShowHiddenPasswordButton()) {
+            if (e.getSource() == PANEL.getShowButton()) {
                 if (generatedPassword == null) return;
 
-                if (panel.getShowHiddenPasswordButton().getText().equals("MOSTRAR")) {
-                    panel.getShowPasswordField().setText(new String(generatedPassword));
-                    panel.getShowHiddenPasswordButton().setText("OCULTAR");
+                if (PANEL.getShowButton().getText().equals("MOSTRAR")) {
+                    PANEL.getPasswordField().setText(new String(generatedPassword));
+                    PANEL.getShowButton().setText("OCULTAR");
 
                 } else {
-                    panel.getShowPasswordField().setText("*".repeat(generatedPassword.length));
-                    panel.getShowHiddenPasswordButton().setText("MOSTRAR");
+                    PANEL.getPasswordField().setText("*".repeat(generatedPassword.length));
+                    PANEL.getShowButton().setText("MOSTRAR");
                 }
             }
 
-            if(e.getSource() == panel.getCopyPasswordButton()){
+            if(e.getSource() == PANEL.getCopyButton()){
                 if(generatedPassword == null) return;
 
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new java.awt.datatransfer.StringSelection(new String(generatedPassword)), null);
-                panel.getCopyPasswordButton().setFont(new Font("Arial", Font.ITALIC,16));
-                panel.getCopyPasswordButton().setText("¡Copiado!");
-                panel.getCopyPasswordButton().setBackground(new Color(137,137,137));
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(new String(generatedPassword)), null);
+                PANEL.getCopyButton().setFont(new Font("Arial", Font.ITALIC,16));
+                PANEL.getCopyButton().setText("¡Copiado!");
+                PANEL.getCopyButton().setBackground(new Color(137,137,137));
                 new Timer(2500, ev -> {
-                    panel.getCopyPasswordButton().setFont(new Font("Arial", Font.BOLD,16));
-                    panel.getCopyPasswordButton().setText("COPIAR");
-                    panel.getCopyPasswordButton().setBackground(new Color(102,0,51));
+                    PANEL.getCopyButton().setFont(new Font("Arial", Font.BOLD,16));
+                    PANEL.getCopyButton().setText("COPIAR");
+                    PANEL.getCopyButton().setBackground(new Color(102,0,51));
                 }).start();
             }
 
         }
-
     }
 }
 

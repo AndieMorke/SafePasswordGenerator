@@ -6,9 +6,9 @@ import java.awt.*;
 public class PasswordPanel extends JPanel {
 
 
-    private JTextField lengthField;
-    private JButton genPasswordButton,showHiddenPasswordButton,copyPasswordButton;
-    private JTextField showPasswordField;
+    private final JTextField LENGTH_FIELD,PASSWORD_FIELD;
+    private final JSlider LENGTH_SLIDER;
+    private final JButton GENERATE_BUTTON,SHOW_BUTTON,COPY_BUTTON;
 
     public PasswordPanel (){
 
@@ -33,44 +33,59 @@ public class PasswordPanel extends JPanel {
         * PANEL PRINCIPAL CENTRO - MENÚ
         * */
         JPanel centerPanel = new JPanel(new BorderLayout(0,20));
-            JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
+            JPanel menuPanel = new JPanel();
+                menuPanel.setLayout(new BoxLayout(menuPanel,BoxLayout.Y_AXIS));
 
-            // Menú longitud
-                    JPanel lengthPanel = new JPanel();
-                        JLabel length = new JLabel("Introduzca la longitud deseada: ");
-                        length.setFont(new Font("Arial", Font.PLAIN,16));
-                        lengthField = new JTextField(2);
-                        lengthField.setFont(new Font("Arial", Font.PLAIN,16));
-                        lengthField.setPreferredSize(new Dimension(50,25));
-                        lengthField.setBorder(BorderFactory.createCompoundBorder(
-                            BorderFactory.createLineBorder(Color.LIGHT_GRAY),      // borde externo
-                            BorderFactory.createEmptyBorder(0, 5, 0, 0)            // padding interno
-                )
-        );
+                    // PANEL LONGITUD
+                    JPanel lengthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,5,0));
+                    lengthPanel.setBorder(new EmptyBorder(10,0,0,0));
+                        // Label LONGITUD
+                        JLabel length = new JLabel("Elija la longitud deseada: ");
+                            length.setFont(new Font("Arial", Font.PLAIN,16));
+                        // Field LONGITUD
+                        LENGTH_FIELD = new JTextField(2);
+                            LENGTH_FIELD.setText("12");
+                            LENGTH_FIELD.setFont(new Font("Arial", Font.PLAIN,16));
+                            LENGTH_FIELD.setEditable(false);
+                            LENGTH_FIELD.setFocusable(false);
+                            LENGTH_FIELD.setCursor(null);
+                            LENGTH_FIELD.getCaret().setBlinkRate(0);
+                            LENGTH_FIELD.getCaret().setVisible(false);
+                            LENGTH_FIELD.setPreferredSize(new Dimension(50,25));
+                            LENGTH_FIELD.setBorder(BorderFactory.createCompoundBorder(
+                                            BorderFactory.createLineBorder(Color.LIGHT_GRAY), 
+                                            BorderFactory.createEmptyBorder(0, 5, 0, 0)));
+                        // Slider LONGITUD
+                        LENGTH_SLIDER = new JSlider(6,30,12);
+                            LENGTH_SLIDER.setBackground(new Color(102,0,51));
+                            LENGTH_SLIDER.setForeground(new Color(102,0,51));
+                            LENGTH_SLIDER.setPaintTrack(true);
 
-        lengthPanel.add(length);
-                    lengthPanel.add(lengthField);
-                    lengthPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+                    // Añadir componentes al PANEL LONGITUD
+                    lengthPanel.add(length);
+                    lengthPanel.add(LENGTH_FIELD);
+                    lengthPanel.add(LENGTH_SLIDER);
 
             // Botón [GENERAR]
                 JPanel generatePanel = new JPanel();
-                    genPasswordButton = new JButton("GENERAR");
-                    genPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
-                    genPasswordButton.setForeground(Color.WHITE);
-                    genPasswordButton.setBackground(new Color(102,0,51));
-                    genPasswordButton.setPreferredSize(new Dimension(120,50));
-                generatePanel.add(genPasswordButton);
+                    GENERATE_BUTTON = new JButton("GENERAR");
+                    GENERATE_BUTTON.setFont(new Font("Arial", Font.BOLD,16));
+                    GENERATE_BUTTON.setForeground(Color.WHITE);
+                    GENERATE_BUTTON.setBackground(new Color(102,0,51));
+                    GENERATE_BUTTON.setPreferredSize(new Dimension(120,50));
+                generatePanel.setBorder(new EmptyBorder(20, 0, 0, 0)); // 10 píxeles arriba
+                generatePanel.add(GENERATE_BUTTON);
 
             menuPanel.add(lengthPanel);
             menuPanel.add(generatePanel);
 
             // Campo contraseña
-                showPasswordField = new JTextField();
-                showPasswordField.setEditable(false);
-                showPasswordField.setFont(new Font("Monospaced", Font.PLAIN, 32));
-                showPasswordField.setHorizontalAlignment(JTextField.CENTER);
-                showPasswordField.setBorder(BorderFactory.createLineBorder(new Color(102,0,51),1,true));
-                showPasswordField.setBackground(new Color(250,250,250));
+                PASSWORD_FIELD = new JTextField();
+                PASSWORD_FIELD.setEditable(false);
+                PASSWORD_FIELD.setFont(new Font("Monospaced", Font.PLAIN, 32));
+                PASSWORD_FIELD.setHorizontalAlignment(JTextField.CENTER);
+                PASSWORD_FIELD.setBorder(BorderFactory.createLineBorder(new Color(102,0,51),1,true));
+                PASSWORD_FIELD.setBackground(new Color(250,250,250));
 
 
 
@@ -78,27 +93,27 @@ public class PasswordPanel extends JPanel {
             // Botones [MOSTRAR] y [COPIAR]
         JPanel showCopyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,0));
             JPanel showPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                showHiddenPasswordButton = new JButton("MOSTRAR");
-                showHiddenPasswordButton.setBackground(new Color(102,0,51));
-                showHiddenPasswordButton.setForeground(Color.WHITE);
-                showHiddenPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
-                showHiddenPasswordButton.setPreferredSize(new Dimension(125,50));
-            showPanel.add(showHiddenPasswordButton);
+                SHOW_BUTTON = new JButton("MOSTRAR");
+                SHOW_BUTTON.setBackground(new Color(102,0,51));
+                SHOW_BUTTON.setForeground(Color.WHITE);
+                SHOW_BUTTON.setFont(new Font("Arial", Font.BOLD,16));
+                SHOW_BUTTON.setPreferredSize(new Dimension(125,50));
+            showPanel.add(SHOW_BUTTON);
         showCopyPanel.add(showPanel);
 
             // Botón [COPIAR]
             JPanel copyPasswordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            copyPasswordButton = new JButton("COPIAR");
-            copyPasswordButton.setBackground(new Color(102,0,51));
-            copyPasswordButton.setForeground(Color.WHITE);
-            copyPasswordButton.setFont(new Font("Arial", Font.BOLD,16));
-            copyPasswordButton.setPreferredSize(new Dimension(125,50));
-            copyPasswordPanel.add(copyPasswordButton);
+            COPY_BUTTON = new JButton("COPIAR");
+            COPY_BUTTON.setBackground(new Color(102,0,51));
+            COPY_BUTTON.setForeground(Color.WHITE);
+            COPY_BUTTON.setFont(new Font("Arial", Font.BOLD,16));
+            COPY_BUTTON.setPreferredSize(new Dimension(125,50));
+            copyPasswordPanel.add(COPY_BUTTON);
             showCopyPanel.add(copyPasswordPanel);
 
 
         centerPanel.add(menuPanel,BorderLayout.NORTH);
-        centerPanel.add(showPasswordField,BorderLayout.CENTER);
+        centerPanel.add(PASSWORD_FIELD,BorderLayout.CENTER);
         centerPanel.add(showCopyPanel,BorderLayout.SOUTH);
 
        add(centerPanel,BorderLayout.CENTER);
@@ -116,19 +131,23 @@ public class PasswordPanel extends JPanel {
 
     // GETTERS
     public JTextField getLengthField() {
-        return this.lengthField;
+        return this.LENGTH_FIELD;
     }
-    public JButton getGenPasswordButton() {
-        return this.genPasswordButton;
+    public JButton getGenerateButton() {
+        return this.GENERATE_BUTTON;
     }
-    public JTextField getShowPasswordField() {
-        return this.showPasswordField;
+    public JTextField getPasswordField() {
+        return this.PASSWORD_FIELD;
     }
-    public JButton getShowHiddenPasswordButton() {
-        return this.showHiddenPasswordButton;
+    public JButton getShowButton() {
+        return this.SHOW_BUTTON;
     }
-    public JButton getCopyPasswordButton() {
-        return this.copyPasswordButton;
+    public JButton getCopyButton() {
+        return this.COPY_BUTTON;
+    }
+
+    public JSlider getLengthSlider() {
+        return this.LENGTH_SLIDER;
     }
 }
 
