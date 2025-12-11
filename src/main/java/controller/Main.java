@@ -23,19 +23,19 @@ public class Main {
 
         SwingUtilities.invokeLater(PasswordFrame::new);
 
-        ArrayList<PasswordRecord> recordsList = new ArrayList<>();
-
-        Database db = new Database();
-        try (Connection conn = db.setConnection()) {
-            recordsList.add(new PasswordRecord("FacebOok","user1","example1@gmail.com","examplepass1"));
-            PasswordManager passwordManager = new PasswordManager();
-            passwordManager.insertPassword(recordsList.get(0));
-            recordsList.add(new PasswordRecord("Instagram","example@gmail.com","examplepass5435"));
-            passwordManager.insertPassword(recordsList.get(1));
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            }
+//        ArrayList<PasswordRecord> recordsList = new ArrayList<>();
+//
+//        Database db = new Database();
+//        try (Connection conn = db.setConnection()) {
+//            recordsList.add(new PasswordRecord("FacebOok","user1","example1@gmail.com","examplepass1"));
+//            PasswordManager passwordManager = new PasswordManager();
+//            passwordManager.insertPassword(recordsList.get(0));
+//            recordsList.add(new PasswordRecord("Instagram","example@gmail.com","examplepass5435"));
+//            passwordManager.insertPassword(recordsList.get(1));
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            }
     }
 }
 
